@@ -4,3 +4,4 @@ Currently in progress:
 1. Intro to Deep Learning with PyTorch(NYU)
 2. CS224n
 3. cs224w
+4. Deployment of Machine Learning Models (https://www.udemy.com/course/deployment-of-machine-learning-models/)
