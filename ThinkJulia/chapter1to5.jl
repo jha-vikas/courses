@@ -11,7 +11,7 @@ print(π)
 
 parse(Int64, "32")
 parse(Float64, "3.14159")
-parse(Int64, "Hello")
+#parse(Int64, "Hello")
 
 trunc(Int64, 23234.3434343)
 
@@ -105,3 +105,9 @@ function circle(t, r)
     len = circumference / n
     polygon(t, n, len)
 end
+
+# Conditionals and Recursions
+minutes = 105
+hours = minutes / 60
+
+remainder = minutes % 60
