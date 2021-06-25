@@ -109,5 +109,52 @@ end
 # Conditionals and Recursions
 minutes = 105
 hours = minutes / 60
-
 remainder = minutes % 60
+
+5==5
+5==6
+true == true
+typeof(true)
+
+2 ≠ 3
+2 ≤ 3
+
+n = 6
+n % 2 == 0 || n % 3 == 0
+n = 9
+n % 2 == 0 || n % 3 == 0
+# ! is negation operator
+x = 2
+
+## chinditionals
+if x > 0
+    println("x is positive")
+    if x < 5
+        println("x is smol")
+    end
+end
+y = 5
+
+## chained conditionals
+if x < y
+    println("x is less than y")
+elseif x > y
+    println("x is greater than y")
+else
+    println("x and y are equal")
+end
+
+## recursion
+function countdown(n)
+    if n ≤ 0
+        println("Blastoff!")
+    else
+        print(n, " ")
+        countdown(n-1)
+    end
+end
+
+countdown(4)
+
+## Keyboard input
+
