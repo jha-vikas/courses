@@ -157,4 +157,43 @@ end
 countdown(4)
 
 ## Keyboard input
+text = readline()
+
+## Debugging
+signal_power = 9
+noise_power = 10
+ratio = signal_power ÷ noise_power
+decibels = 10 * log10(ratio)
+print(decibels)
+
+# Fruitful functions
+e = exp(1.0)
+#height = radius * sin(radians)
+
+function area1(radius)
+    a = π * radius^2
+    return a
+end
+
+#=
+in a fruitful function the return statement includes an expression. 
+This statement means: “Return immediately from this function and 
+use the following expression as a return value.”
+#=
+asdsw
+=#
+=#
+
+function area2(radius)
+    π * radius^2
+end
+
+# both area fucntions are same
+
+function distance(x₁, y₁, x₂, y₂)
+    dx = x₂ - x₁
+    dy = y₂ - y₁  
+    @show dx dy  # prints them with the @show macro. 
+    @show sqrt(dx^2 + dy^2)
+end
 
