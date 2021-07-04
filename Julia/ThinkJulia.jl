@@ -1,3 +1,4 @@
+using Base: first_index
 message = "And now for something completely different"
 println(message)
 
@@ -210,5 +211,205 @@ b
 ## Updating variables
 x = x+1
 ## while
+function countdown(n)
+    while n > 0
+        print(n, " ")
+        n = n - 1
+    end
+    println("Blastoff")
+end
+
+
+function seq(n)
+    while n != 1
+        println(n)
+        if n % 2 == 0   # n is even
+            n = n / 2
+        else
+            n = n*3 + 1
+        end
+    end
+end
+
+## break
+while true
+    print("(Type 'done' to terminate)> ")
+    line = readline()
+    if line == "done"
+        break
+    end
+    println(line)
+end
+println("Done!")
+
+## continue
+for i in 1:10
+    if i % 3 == 0
+        continue
+    end
+    print(i, " ")
+end
+
+### square roots
+function square_root(a,x,ε)
+    while true
+        println(x)
+        y = (x + a/x) / 2
+        if abs(y - x) < ε
+            break
+        end
+        x = y
+    end
+end
+
+# Strings
+fruit = "banana"
+sizeof(fruit)
+
+index = firstindex(fruit)
+while index <= sizeof(fruit)
+    letter = fruit[index]
+    println(letter)
+    global index = nextind(fruit, index)
+end
+
+str = "Julius Caesar";
+str[1:6]
+str[8:end]
+
+### Strings are immutable
+## String Interpolation
+greet = "Hello"
+whom = "World"
+"$greet, $(whom)!"
+'a' ∈ fruit
+
+
+# Word Play
+fin = open("words.txt")
+
+for line in eachline("words.txt")
+    if length(line) > 12
+        println(line)
+    end
+end
+
+# Arrays
+cheeses = ["Cheddar", "Edam", "Gouda"];
+numbers = [42, 123];
+empty = [];
+print(cheeses, " ", numbers, " ", empty)
+typeof(cheeses)
+### Arrays are mutable
+### The slice operator [:], makes a copy of the whole array:
+### push! adds new element to end of array
+t = ['a', 'b', 'c'];
+println(t)
+push!(t,'d')
+println(t)
+### append! add the elements of the second array to the end of the first:
+t1 = ['a', 'b', 'c'];
+t2 = ['d', 'e'];
+append!(t1, t2);
+print(t1)
+### sort! arranges the elements of the array from low to high:
+t = ['d', 'c', 'e', 'b', 'a'];
+sort!(t);
+print(t)
+### sort returns a copy of the elements of the array in order:
+t1 = ['d', 'c', 'e', 'b', 'a'];
+t2 = sort(t1)
+println(t1)
+print(t2)
+
+## Dot syntax
+#=For every binary operator like ^, there is a corresponding dot operator .^ that is 
+automatically defined to perform ^ element-by-element on arrays. =#
+print([1,2,3].^3)
+t = uppercase.(["abc", "def", "ghi"]);
+print(t)
+
+## Deleting elements
+t = ['a', 'b', 'c'];
+splice!(t, 2)
+print(t)
+#splice! modifies the array and returns the element that was removed.
+#pop! deletes and returns the last element:
+t = ['a', 'b', 'c'];
+pop!(t)
+print(t)
+#popfirst! deletes and returns the first element: 
+t = ['a', 'b', 'c'];
+popfirst!(t)
+print(t)
+#=The functions pushfirst! and push! insert an element at the beginning, respectively at 
+the end of the array.
+If you don’t need the removed value, you can use the function deleteat!:=#
+split("spam-spam-spam", '-')
+t = ["pining", "for", "the", "fjords"];
+s = join(t, "_")
+
+a = "banana"
+b = "banana"
+a ≡ b # reutns true as julia creates only one instance
+
+a = [1, 2, 3];
+b = [1, 2, 3];
+a ≡ b # reutns false as julia creates only one instance
+
+### If a refers to an object and you assign b = a, then both variables refer to the same object:
+a = [1, 2, 3];
+b = a
+println(a)
+println(b)
+b[1] = 42
+println(a)
+println(b)
+
+#=When you pass an array to a function, the function gets a reference to the array. 
+    If the function modifies the array, the caller sees the change. =#
+
+
+# Dictionary
+## It is a mapping
+eng2sp = Dict()
+eng2sp["one"] = "uno";
+
+eng2sp = Dict("one" => "uno", "two" => "dos", "three" => "tres")
+ks = keys(eng2sp)
+"one" ∈ ks
+vs = values(eng2sp);
+"uno" ∈ vs
+
+### Dict as counter of alphabets
+function histogram(s)
+    d = Dict()
+    for c in s
+        if c ∉ keys(d)
+            d[c] = 1
+        else
+            d[c] += 1
+        end
+    end
+    d
+end
+
+h = histogram("brontosaurus")
+
+#=Dictionaries have a function called get that takes a key and a default value. 
+If the key appears in the dictionary, get returns the corresponding value; 
+otherwise it returns the default value.=#
+get(h, 'a', 0)
+get(h, 'z', 0)
+
+# Return an Array of all items in a collection or iterator.
+collect(t)
+collect(keys(h))
+
+### If a global variable refers to a mutable value, you can modify the value without declaring the variable global:
+### but if you want to reassign the variable, you have to declare it global
+### For performance reasons, you should declare a global variable constant. 
+### You can no longer reassign the variable but if it refers to a mutable value, 
+### you can modify the value. 
 
 
