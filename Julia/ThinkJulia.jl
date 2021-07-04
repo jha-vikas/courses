@@ -197,3 +197,18 @@ function distance(x₁, y₁, x₂, y₂)
     @show sqrt(dx^2 + dy^2)
 end
 
+# Iteration
+## Reassignment
+x = 5
+x = 7
+
+a = 5
+b = a
+a = 3
+b
+
+## Updating variables
+x = x+1
+## while
+
+
