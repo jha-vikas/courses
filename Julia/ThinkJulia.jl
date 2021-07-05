@@ -413,3 +413,237 @@ collect(keys(h))
 ### you can modify the value. 
 
 
+# Tuples
+##  a tuple is a comma-separated list of values. Can be defined both ways:
+t = 'a', 'b', 'c', 'd', 'e'
+t = ('a', 'b', 'c', 'd', 'e')
+### To create a tuple with a single element, you have to include a final comma: 
+t1 = ('a',)
+typeof(t1)
+t3 = tuple(1, 'a', pi)
+
+## Tuple Assignment
+a = 1; b=2
+a,b = b,a
+
+(a, b) = (1, 2, 3)  # a,b are assigned 1,2. 3 is not used
+a, b, c = 1, 2  # throws error
+
+addr = "julius.caesar@rome"
+uname, domain = split(addr, "@")
+
+### As return values
+t = divrem(7, 3)
+q, r = divrem(7, 3);
+@show q r;
+
+## Variable-length Argument Tuples
+#=Functions can take a variable number of arguments. 
+A parameter name that ends with ... gathers arguments into a tuple.
+The complement of gather is scatter. If you have a sequence of values and you want to 
+pass it to a function as multiple arguments, you can use the ... operator.
+=#
+function printall(args...)
+    println(args)
+end
+printall(1, 2.0, '3')
+printall(1, 2.0, '3', "Hello")
+
+t = (7, 3);
+divrem(t)  # throws error
+divrem(t...)
+
+## arrays and tuples
+s = "abc";
+t = [1, 2, 3];
+zip(s,t)
+
+for pair in zip(s, t)
+    println(pair)
+end
+
+collect(zip(s, t))
+collect(zip("Anne", "Elk"))
+
+t = [('a', 1), ('b', 2), ('c', 3)];
+for (letter, number) in t
+    println(number, " ", letter)
+end
+
+#=If you combine zip, for and tuple assignment, you get a useful idiom for traversing 
+two (or more) sequences at the same time. =#
+
+function hasmatch(t1, t2)
+    for (x, y) in zip(t1, t2)
+        if x == y
+            return true
+        end
+    end
+    false
+end
+
+for (index, element) in enumerate("abc")
+    println(index, " ", element)
+end
+
+d = Dict('a'=>1, 'b'=>2, 'c'=>3);
+
+for (key, value) in d
+    println(key, " ", value)
+end
+
+t = [('a', 1), ('c', 3), ('b', 2)];
+d = Dict(t)
+
+d = Dict(zip("abc", 1:3))
+
+function processfile(filename)
+    hist = Dict()
+    for line in eachline(filename)
+        processline(line, hist)
+    end
+    hist
+end;
+
+function processline(line, hist)
+    line = replace(line, '-' => ' ')
+    for word in split(line)
+        word = string(filter(isletter, [word...])...)
+        word = lowercase(word)
+        hist[word] = get!(hist, word, 0) + 1
+    end
+end;
+
+function totalwords(hist)
+    sum(values(hist))
+end
+
+function differentwords(hist)
+    length(hist)
+end
+
+hist = processfile("words.txt")
+println("Total number of words: ", totalwords(hist))
+println("Number of different words: ", differentwords(hist))
+
+function mostcommon(hist)
+    t = []
+    for (key, value) in hist
+        push!(t, (value, key))
+    end
+    reverse(sort(t))
+end
+
+t = mostcommon(hist)
+println("The most common words are:")
+for (freq, word) in t[1:10]
+    println(word, "\t", freq)
+end
+
+## subtract takes dictionaries d1 and d2 and returns a new dictionary that contains all 
+## the keys from d1 that are not in d2
+
+# Files
+## Reading and Writing
+fout = open("output.txt", "w")
+line1 = "This here's the wattle,\n";
+write(fout, line1)
+line2 = "the emblem of our land.\n";
+write(fout, line2)
+close(fout)
+
+## Formatting
+fout = open("output.txt","w")
+write(fout, string(150))
+write(fout, "\n")
+camels = 42
+println(fout, "I have spotted $camels camels.")
+close(fout)
+
+## FIlenames and Paths
+cwd = pwd();
+abspath("output.txt")
+ispath("ThinkJulia.jl")
+isdir("D:/Study")
+
+readdir("D:/SteamLibrary/")
+readdir(cwd)
+
+function walk(dirname)
+    for name in readdir(dirname)
+        path = joinpath(dirname, name)
+        if isfile(path)
+            println(path)
+        else
+            try
+                walk(path)
+            catch e
+                pass
+            end
+        end
+    end
+end
+
+walkdir("D/Study")
+
+using ThinkJulia
+db = DBM("captions", "c")
+db["cleese.png"] = "Photo of John Cleese."
+close(db)
+
+using Serialization
+io = IOBuffer();
+t = [1, 2, 3];
+serialize(io, t)
+print(take!(io))
+s = take!(io);
+t2 = deserialize(IOBuffer(s));
+
+## Command Objects
+cmd = `echo hello`
+a = read(cmd, String)
+
+# Structs and Functions
+#= A programmer-defined composite type is also called a struct. The struct definition 
+for a point looks like this: =#
+
+struct Point
+    x
+    y
+end
+
+p = Point(3.0, 4.0)
+distance = sqrt(p.x^2 + p.y^2)
+### Structs are immutable
+### Mutable structs:
+mutable struct MPoint
+    x
+    y
+end
+
+blank = MPoint(0.0, 0.0)
+blank.x = 3.0
+blank.y = 4.0
+
+"""
+Represents a rectangle.
+
+fields: width, height, corner.
+"""
+struct Rectangle
+    width
+    height
+    corner
+end
+
+origin = MPoint(0.0, 0.0)
+box = Rectangle(100.0, 200.0, origin)
+
+## Instances as Arguments
+function printpoint(p)
+    println("($(p.x), $(p.y))")
+end
+printpoint(blank)
+fieldnames(Point)
+isdefined(p, :x)
+
