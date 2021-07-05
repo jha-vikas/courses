@@ -647,3 +647,22 @@ printpoint(blank)
 fieldnames(Point)
 isdefined(p, :x)
 
+
+
+function sinc(x)::Float64   #return value is always converted to Float64
+    if x == 0
+        return 1
+    end
+    sin(x)/(x)
+end
+
+struct Card
+    suit :: Int64
+    rank :: Int64
+    function Card(suit::Int64, rank::Int64)
+        @assert(1 ≤ suit ≤ 4, "suit is not between 1 and 4")
+        @assert(1 ≤ rank ≤ 13, "rank is not betwen 1 and 13")
+        new(suit, rank)        
+    end
+end
+
