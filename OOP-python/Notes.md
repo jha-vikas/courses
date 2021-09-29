@@ -1,6 +1,4 @@
-# Chapter 1: Object Oriented Design
-
-## Overview
+## Objects
 
 * Object: collection of data and associated behaviours
 * Object oriented means functionally directed towards modeling objects.
@@ -21,3 +19,12 @@
 * Polymorphism: ability to treat a class differently depending on which subclass is implemented. Sort of polymorphism in Python is referred as "duck typing".
 * Multiple inheritance: Subclass can inherit functionality from multiple parent classes.
 
+## Modules and packages
+
+* Modules are python files. The single file in a program is a module.
+* Package is a collection of modules in a folder. The name of the package is the name of the folder. While importing modules or classes between packages, we have to be cautious about the syntax. There are two ways to importing modules: absolute imports and relative imports.
+* In absolute import, we specify the full path. In relative import, we specify the location relative to the current location. "." means to look for the module in the current directory. Eg: `from .database import Database`. ".." means look for the module in the parent directory. Eg: `from ..database import Database`. We can use more periods to go further up the hierarchy. We can also go down one side and back up the other. Eg: `from ..contact.email import send_mail`. It uses two periods to say, *the parent of the payments(current) package*, and then uses the normal `package.module` syntax to go back up into the contact package.
+* We can also import code directly from packages, as opposed to just modules inside the packages. The `__init__.py` defines a directory as a package. This file can contain any variable or class declarations we like, and they will be available as part of the package. In our example, if the `ecommerce/__init__.py` file contained this line: `from .database import db`, we can then access the `db` attribute from `main.py` or any other file using this import: `from ecommerce import db`.
+* All module-level code is executed immediately at the time it is imported. However, if it is inside a method or function, the function will be created, but its internal code will not be executed until the function is called. We should always put our startup code in a function (conventionally,
+  called main) and only execute that function when we know we are running the module as a script, but not when our code is being imported from a different script.
+* 
