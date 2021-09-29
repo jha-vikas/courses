@@ -29,4 +29,5 @@
   called main) and only execute that function when we know we are running the module as a script, but not when our code is being imported from a different script.
 * Technically, all methods and attributes on a class are publicly available. By convention, we should prefix an attribute or method with an underscore character `_`. It means that *"this is an internal variable, think three times before accessing it directly"*.
 * Name mangling: Prefixing double underscore `"__"` before a method or property means that the method or property can still be called by outside objects, but require extra work and is strong indicator that you demand that your attribute remains private.
-* 
+* Inheritance:
+  * All python classes are subclasses of the special class named object
