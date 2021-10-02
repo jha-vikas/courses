@@ -31,4 +31,4 @@
 * Name mangling: Prefixing double underscore `"__"` before a method or property means that the method or property can still be called by outside objects, but require extra work and is strong indicator that you demand that your attribute remains private.
 * Inheritance: All python classes are subclasses of the special class named `object`.
 * Abstract base classes: They define a set of methods and properties that a class must implement in order to be considered a duck-type instance of that class. The class can extend the abstract base class itself in order to be used as an instance of that class, but it must supply all the appropriate methods. Most of the abstract base classes that exist in the Python Standard Library live in the collections module.
-* 
+* By marking a method or property as being abstract, you are stating that any subclass of this class must implement that method or supply that property in order to be considered a proper member of the class.
