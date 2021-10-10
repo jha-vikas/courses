@@ -39,4 +39,7 @@
 * When we use the except: clause without specifying any type of exception, it will catch all subclasses of `BaseException`; which is to say, it will catch all exceptions, including the two special ones. Since we almost always want these to get special treatment, it is unwise to use the except: statement without arguments. If you want to catch all exceptions other than `SystemExit` and `KeyboardInterrupt`, explicitly catch `Exception`.
 * The `Exception.__init__` method is designed to accept any arguments and store them as tuple in an attribute named `args`. This makes exceptions easier to define without needing to override `__init__`.
 * Reasons to have custom exceptions: Add info to the exception, log it, to give info the the programmer about the behaviour of a library in helping debugging.
+* Python gives us the property keyword to make methods look like attributes. We can therefore write our code to use direct member access, and if we unexpectedly need to alter the implementation to do some calculation when getting or setting that attribute's value, we can do so without changing the interface.
+* Decorator: `@property` applies `property` function as a decorator, and is equivalent to `property()` syntax. It defines the `getter` function.
+* In Python, data, properties, and methods are all attributes on a class. The fact that a method is callable does not distinguish it from other types of attributes.
 * 
