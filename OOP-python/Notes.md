@@ -42,4 +42,11 @@
 * Python gives us the property keyword to make methods look like attributes. We can therefore write our code to use direct member access, and if we unexpectedly need to alter the implementation to do some calculation when getting or setting that attribute's value, we can do so without changing the interface.
 * Decorator: `@property` applies `property` function as a decorator, and is equivalent to `property()` syntax. It defines the `getter` function.
 * In Python, data, properties, and methods are all attributes on a class. The fact that a method is callable does not distinguish it from other types of attributes.
-* 
+
+## Python Data Structure
+
+* It is not possible to set any attributes on an object that was instantiated directly. It is to save memory as allowing Python to have arbitrary attribute will take a certain amount of memory to track of what attributes each object has, for storing both attribute name and its value. Even without any attributes, memory has to be allocated for potential new attributes.
+* Tuples: can store specific number of other objects in __order__. They are __immutable__. They are used to store data, behaviour cannot be stored in a tuple. The primary purpose of a tuple is to aggregate different pieces of data together into one container.
+* Named Tuples: If we do not need to add behaviour to an object, and it is known in advance what attributes need to be stored, __named tuple__ can be used. `namedtuple` constructor accepts two arguments. First is identifier for the named tuple, and second is a string of space-separated attributes that the named tuple can have. Named tuples are immutable too.
+* Dictionaries: They allow to map objects directly to other objects. They are extremely efficient in looking up a value, given a specific key. Using `get` method in dictionaries, it can accept a key as first parameter, and an optional default value if the key doesn't exist. For even more control, we can use the `setdefault` method. The order is not preserved in the dictionary. They are unsorted. Anything unmutable can be used as dictionary key. Dictionaries are used in cases where each key represent different instances of similar objects. They are also used where each key represents some aspect of a single structure.
+* Defaultdict: The `defaultdict` accepts a function as its constructor. Whenever a key is accessed that is not already in the dictionary, it calls that function, to create a default value.
