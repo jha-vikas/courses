@@ -73,3 +73,23 @@ class DictSorted(dict):
         return self.ordered_keys.__iter__()
 
 
+## queue
+from queue import Queue
+lineup = Queue(maxsize=3)
+lineup.get(block=False)
+lineup.put("one")
+lineup.put("two")
+lineup.put("three")
+lineup.put("four", timeout=1)
+
+lineup.get()
+lineup.get()
+lineup.get()
+
+## Stacks
+from queue import LifoQueue
+stack = LifoQueue(maxsize=3)
+stack.put("one")
+stack.put("two")
+stack.put("three")
+stack.put("four")
