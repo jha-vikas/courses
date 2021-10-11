@@ -31,3 +31,11 @@ def letter_frequency(sentence):
     for letter in sentence:
         frequencies[letter] += 1
     return frequencies
+
+
+## Counter
+from collections import Counter
+def letter_frequency1(sentence):
+    return Counter(sentence)
+
+
