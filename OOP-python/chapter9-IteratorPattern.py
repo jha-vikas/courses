@@ -55,4 +55,10 @@ books = [
 fantasy_authors = {b.author for b in books if b.genre == 'fantasy'}
 fantasy_titles = {b.title: b.author for b in books if b.genre == 'fantasy'}
 
-# Generator expressions
+# Coroutines
+def tally():
+    score = 0
+    while True:
+        increment = yield score
+        score += increment
+
